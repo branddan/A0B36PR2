@@ -14,14 +14,12 @@ public class Helicopter {
     private Position poloha;
     private String playerName;
     private String type;
-    private int pocetMicu;
     private double health = 0;
     private int skore2;
 
     public Helicopter(String jmeno) {
         this.playerName = jmeno;
         this.poloha = new Position();
-        this.pocetMicu = 8;
     }
 
     public int zaokrouhlit() {
@@ -63,14 +61,6 @@ public class Helicopter {
 
     public void setSkore2(int skore2) {
         if (skore2 >= 0) this.skore2 = skore2;
-    }
-
-    public int getPocetMicu() {
-        return pocetMicu;
-    }
-
-    public void setPocetMicu(int pocetMicu) {
-        if (pocetMicu >= 0) this.pocetMicu = pocetMicu;
     }
 
     @Override

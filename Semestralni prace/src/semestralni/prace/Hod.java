@@ -37,24 +37,15 @@ public class Hod {
         double p2 = (rychlost * Math.sin(uhel)) / (rychlost * Math.cos(uhel) + podminky.getVitr());
         double p3 = (hrac.getPoloha()).getY();
         boolean trefa;
-        hrac.setPocetMicu(hrac.getPocetMicu() - 1);
 
         if (Math.abs((p1 * Math.pow((terc.getPoloha()).getX() - (hrac.getPoloha()).getX(), 2) + p2 * ((terc.getPoloha()).getX() - (hrac.getPoloha()).getX()) + p3) - (terc.getPoloha()).getY()) <= terc.getR()) {
             return trefa = true;
         } else if (((p1 * Math.pow((terc.getPoloha()).getX() - (hrac.getPoloha()).getX(), 2) + p2 * ((terc.getPoloha()).getX() - (hrac.getPoloha()).getX()) + p3) - (terc.getPoloha()).getY()) >= terc.getR()) {
-            if (hrac.getPocetMicu() != 0) {
-                System.out.println("Moc vysoko, zkus to znovu.");
-            } else {
-                System.out.println("Moc vysoko, smula..");
-            }
+            System.out.println("Moc vysoko, zkus to znovu.");
 
             return trefa = false;
         } else {
-            if (hrac.getPocetMicu() != 0) {
-                System.out.println("Moc nizko, zkus to znovu.");
-            } else {
-                System.out.println("Moc nizko, smula..");
-            }
+            System.out.println("Moc vysoko, zkus to znovu.");
 
             return trefa = false;
         }
@@ -81,7 +72,7 @@ public class Hod {
         if (rychlost > 45 || rychlost < 0) { // rychlost je omezena na 0-45
             System.out.println("Zadana hodnota mimo povoleny interval, zadej znovu.");
             System.out.println("");
-        }else{
+        } else {
             this.rychlost = rychlost;
         }
     }
@@ -94,7 +85,7 @@ public class Hod {
         if (Math.abs(uhel) > 90) { // uhel je omezen na -90-90
             System.out.println("Zadana hodnota mimo povoleny interval, zadej znovu.");
             System.out.println("");
-        }else{
+        } else {
             this.uhel = Math.PI * uhel / 180;
         }
     }
@@ -104,7 +95,9 @@ public class Hod {
     }
 
     public void setPodminky(Podminky podminky) {
-        if (podminky != null) this.podminky = podminky;
+        if (podminky != null) {
+            this.podminky = podminky;
+        }
     }
 
     public Terc getTerc() {
@@ -112,7 +105,9 @@ public class Hod {
     }
 
     public void setTerc(Terc terc) {
-        if (terc != null) this.terc = terc;
+        if (terc != null) {
+            this.terc = terc;
+        }
     }
 
     public Helicopter getHrac() {
@@ -120,7 +115,9 @@ public class Hod {
     }
 
     public void setHrac(Helicopter hrac) {
-        if (hrac != null) this.hrac = hrac;
+        if (hrac != null) {
+            this.hrac = hrac;
+        }
     }
 
     @Override

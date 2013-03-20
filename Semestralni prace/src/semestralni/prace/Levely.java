@@ -38,7 +38,6 @@ public class Levely {
             System.out.println("Dostal jses na 2. uroven. Dostanes bonus 15 bodu a 3 mice!");
             System.out.println("");
             hrac.setSkore(hrac.getSkore() + 15);
-            hrac.setPocetMicu(hrac.getPocetMicu() + 3);
             System.out.println("Jsi na mesici, gravitace je tu slabsi, zato vitr skoro nefouka.");
             System.out.println("");
             podminky.setGravitace(4.5);
@@ -48,7 +47,6 @@ public class Levely {
             System.out.println("Dostal jses na 3. uroven. Dostanes bonus 30 bodu a 3 mice!");
             System.out.println("");
             hrac.setSkore(hrac.getSkore() + 30);
-            hrac.setPocetMicu(hrac.getPocetMicu() + 3);
             System.out.println("Dostal jses do boure, vitr fouka silneji a navic kazke kolo jinak.");
             podminky.setGravitace(9.8);
         }
