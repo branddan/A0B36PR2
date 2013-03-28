@@ -29,7 +29,7 @@ public class Levely {
         System.out.println("");
 
         if (lvl == 1) {
-            System.out.println(hrac.getJmeno() + ", stojis na pozici " + hrac.toString() + " a terc je v " + terc.toString() + ".");
+            System.out.println(hrac.getPlayerName() + ", stojis na pozici " + hrac.toString() + " a terc je v " + terc.toString() + ".");
             System.out.print("Polomer terce je " + terc.getR() + " metru. ");
             System.out.println(podminky.toString());
             System.out.println("");
@@ -37,7 +37,7 @@ public class Levely {
         if (lvl == 2) {
             System.out.println("Dostal jses na 2. uroven. Dostanes bonus 15 bodu a 3 mice!");
             System.out.println("");
-            hrac.setSkore(hrac.getSkore() + 15);
+            hrac.setHealth(hrac.getHealth() + 15);
             System.out.println("Jsi na mesici, gravitace je tu slabsi, zato vitr skoro nefouka.");
             System.out.println("");
             podminky.setGravitace(4.5);
@@ -46,7 +46,7 @@ public class Levely {
         if (lvl == 3) {
             System.out.println("Dostal jses na 3. uroven. Dostanes bonus 30 bodu a 3 mice!");
             System.out.println("");
-            hrac.setSkore(hrac.getSkore() + 30);
+            hrac.setHealth(hrac.getHealth() + 30);
             System.out.println("Dostal jses do boure, vitr fouka silneji a navic kazke kolo jinak.");
             podminky.setGravitace(9.8);
         }

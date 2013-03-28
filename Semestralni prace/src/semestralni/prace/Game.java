@@ -8,12 +8,14 @@ package semestralni.prace;
  *
  * @author Daniel
  */
-public class SemestralniPrace {
+public class Game {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        
+        
     }
 }

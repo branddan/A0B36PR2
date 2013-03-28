@@ -55,7 +55,7 @@ public class Graf {
         for (int i = 0; i < rovina.length; i++) { //y-ova osa
             int[] x = rovina[i];
             for (int j = 0; j < x.length; j++) { //x-ova osa
-                if (rovina.length - i == ((hrac.getPoloha()).getY()) && j == (hrac.getPoloha()).getX()) {
+                if (rovina.length - i == ((hrac.getPosition()).getY()) && j == (hrac.getPosition()).getX()) {
                     System.out.print("H");
                 } else if (rovina.length - i == ((terc.getPoloha()).getY()) && j == (terc.getPoloha()).getX()) {
                     System.out.print("T");
@@ -74,17 +74,17 @@ public class Graf {
         vykresliVitr(podminky);
         double p1 = -podminky.getGravitace() / (2 * Math.pow(v * Math.cos(a) + podminky.getVitr(), 2)); //pomocne konstanty
         double p2 = (v * Math.sin(a)) / (v * Math.cos(a) + podminky.getVitr());
-        double p3 = (hrac.getPoloha()).getY();
+        double p3 = (hrac.getPosition()).getY();
 
         int[][] rovina = new int[20][100];
         for (int i = 0; i < rovina.length; i++) { //y-ova osa
             int[] x = rovina[i];
             for (int j = 0; j < x.length; j++) { //x-ova osa
-                if (rovina.length - i == ((hrac.getPoloha()).getY()) && j == (hrac.getPoloha()).getX()) {
+                if (rovina.length - i == ((hrac.getPosition()).getY()) && j == (hrac.getPosition()).getX()) {
                     System.out.print("H");
                 } else if (rovina.length - i == ((terc.getPoloha()).getY()) && j == (terc.getPoloha()).getX()) {
                     System.out.print("T");
-                } else if (j > ((hrac.getPoloha()).getX()) && ((int) (p1 * Math.pow(j - ((hrac.getPoloha()).getX()), 2) + p2 * (j - ((hrac.getPoloha()).getX())) + p3)) == rovina.length - i) {
+                } else if (j > ((hrac.getPosition()).getX()) && ((int) (p1 * Math.pow(j - ((hrac.getPosition()).getX()), 2) + p2 * (j - ((hrac.getPosition()).getX())) + p3)) == rovina.length - i) {
                     System.out.print("*");
                 } else if (i == rovina.length - 1 || i == 0 || j == x.length - 1 || j == 0) {
                     System.out.print(".");

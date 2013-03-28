@@ -27,7 +27,7 @@ public class Terc {
     }
 
     public void novaPoloha() {
-        poloha.vytvorRandom(70, 99, 1, 17);
+        poloha.createRandom(70, 99, 1, 17);
     }
 
     public double getR() {

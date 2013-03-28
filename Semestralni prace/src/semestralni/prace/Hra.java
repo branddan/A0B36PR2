@@ -24,7 +24,7 @@ public class Hra {
         Scanner scan = new Scanner(System.in);
         System.out.print("Zadej sve jmeno: "); // hrac zapne hru, zada sve jmeno
         Helicopter hrac = new Helicopter(scan.nextLine());
-        hrac.novaPoloha();
+        hrac.setRandomPosition();
 
         lvl.setHrac(hrac);
         lvl.setTerc(terc);
@@ -33,12 +33,12 @@ public class Hra {
 
 
         //nastaveni hodnot v ostatnich tridach
-        Hod hod = new Hod();
+        Shot hod = new Shot();
         Graf graf = new Graf();
         graf.setPodminky(podminky);
         hod.setPodminky(podminky);
         graf.setHrac(hrac);
-        hod.setHrac(hrac);
+        hod.setPlayerAt(hrac);
         graf.setTerc(terc);
         hod.setTerc(terc);
         int pocLvl = 0; // pocitadlo levelu, kdyz =5 prejde se na dalsi.
@@ -62,24 +62,24 @@ public class Hra {
                 graf.vykresliUvod(hrac, terc);
             }
 
-            System.out.print("Pocet zbyvajicich micu: " + hrac.getPocetMicu()); // informace pro hrace o micich a skore
-            System.out.printf("  Aktualni skore: %.1f %n", hrac.getSkore());
+            System.out.print("Pocet zbyvajicich micu: " + hrac.getPocetMicu()); // informace pro hrace o micich a damage
+            System.out.printf("  Aktualni skore: %.1f %n", hrac.getHealth());
             System.out.print("Zadej rychlost (0..45): "); // hrac zadava pocatecni rychlost sveho hodu
             double rychost = scan.nextDouble();
-            hod.setRychlost(rychost);
+            hod.setSpeed(rychost);
             if (rychost < 0 || rychost > 45) continue;
             
             System.out.print("Zadej uhel ve stupnich (-90..90): ");
             double uhel = scan.nextDouble();
-            hod.setUhel(uhel); // ve strupnich
+            hod.setAngle(uhel); // ve strupnich
             if (Math.abs(uhel) > 90) continue;
 
-            graf.setV(hod.getRychlost());
-            graf.setA(hod.getUhel());
+            graf.setV(hod.getSpeed());
+            graf.setA(hod.getAngle());
             graf.vykresliPrubeh(hrac, terc); // vykresli se hod
-            boolean trefa = hod.trefa(); // vyhodnoti se hod
+            boolean trefa = hod.hit(); // vyhodnoti se hod
             if (trefa == true) {
-                hod.skore();
+                hod.damage();
                 pocHod = 0;
                 pocLvl++;
                 if (pocLvl == 5 && lvl.getLvl() < 3) { // hrac postupuje do dalsiho lvl
@@ -106,7 +106,7 @@ public class Hra {
         //ukladani do souboru
         
         Vysledek prvni = Vysledek.nactiVysledky();
-        Vysledek novy = new Vysledek(hrac.getJmeno(), hrac.zaokrouhlit());
+        Vysledek novy = new Vysledek(hrac.getPlayerName(), hrac.zaokrouhlit());
         prvni = prvni.ulozHraceDoVysledku(prvni, novy);
         System.out.println("");System.out.println("Vysledky:");
         Vysledek.tisk(prvni);
