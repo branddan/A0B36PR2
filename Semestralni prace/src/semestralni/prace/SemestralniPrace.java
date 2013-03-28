@@ -4,21 +4,24 @@
  */
 package semestralni.prace;
 
-import java.awt.*;
+import gui.*;
+
 
 /**
  *
  * @author Daniel
  */
-public class Game {
+public class SemestralniPrace {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    public void swich(){
         
-        Window w = new Window();
-        w.setVisible(true);
+    }
+    public static void main(String[] args) {
+        // TODO code application logic here
+        
+        GameWindow o = new GameWindow();
+        o.setVisible(true);
+        
         
     }
 }

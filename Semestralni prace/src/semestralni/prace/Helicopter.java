@@ -19,6 +19,7 @@ public class Helicopter {
     private double size; //velikost helikoptery
     private int moves; //ovlivni pohybovych tahu
     private int skore2; //mazat
+    private boolean attack; //jestli je na tahu
 
 //    public Helicopter(String jmeno) {
 //        this.playerName = jmeno;
@@ -108,18 +109,28 @@ public class Helicopter {
         this.moves = moves;
     }
 
-    public void move(int direction) {
+    public boolean isAttack() {
+        return attack;
+    }
+
+    public void setAttack(boolean attack) {
+        this.attack = attack;
+    }
+    
+    
+
+    public void move(String direction) {
         switch (direction) {
-            case 1:
+            case "up":
                 this.position.setY(this.getPosition().getY() + 5);
                 break;
-            case 2:
+            case "right":
                 this.position.setX(this.getPosition().getX() + 5);
                 break;
-            case 3:
+            case "down":
                 this.position.setY(this.getPosition().getY() - 5);
                 break;
-            case 4:
+            case "left":
                 this.position.setX(this.getPosition().getX() - 5);
                 break;
             default:

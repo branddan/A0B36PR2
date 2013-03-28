@@ -2,23 +2,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package semestralni.prace;
-
-import java.awt.*;
+package gui;
 
 /**
  *
  * @author Daniel
  */
-public class Game {
+public class test {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
         
-        Window w = new Window();
-        w.setVisible(true);
-        
+        PlayWindow o = new PlayWindow();
+        o.setVisible(true);
     }
 }
