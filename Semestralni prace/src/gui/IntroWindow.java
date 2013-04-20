@@ -9,6 +9,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import semestralni.prace.*;
 import gui.*;
+import java.awt.Color;
 
 /**
  *
@@ -16,24 +17,21 @@ import gui.*;
  */
 public class IntroWindow extends JFrame {
 
-    JButton player1;
+    JButton playerButton;
     JButton player2;
     JRadioButton apache;
     JRadioButton blackHawk;
     ButtonGroup chose;
     JTextField name;
+    JLabel instrukce;
     Helicopter player;
     int playerNumber = 0;
     GameWindow game = new GameWindow();
+    
 
     public class NewPlayer implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-//            if (e.getSource() == player1) {
-//                player = new Apache(name.getText());
-//            } else if (e.getSource() == player2) {
-//                player = new BlackHawk(name.getText());
-//            }
 
             if (apache.isSelected()) {
                 player = new Apache(name.getText());
@@ -70,9 +68,15 @@ public class IntroWindow extends JFrame {
 
         super("Intro");
         this.setSize(800, 600);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
-
+        
+        instrukce = new JLabel();
+        instrukce.setBounds(0, 500, 800, 100);
+        instrukce.setText("Player number 1, enter your name and choose your helicopter.");
+        instrukce.setForeground(Color.green);
+        this.add(instrukce);
         chose = new ButtonGroup();
 
         apache = new JRadioButton();
@@ -87,20 +91,17 @@ public class IntroWindow extends JFrame {
         chose.add(blackHawk);
         this.add(blackHawk);
 
-        player1 = new JButton();
-        player1.setBounds(20, 100, 130, 32);
-        player1.setText("Create 1st player");
-        player1.addActionListener(new NewPlayer());
-        this.add(player1);
-
-        player2 = new JButton();
-        player2.setBounds(200, 100, 130, 32);
-        player2.setText("Create 2nd player");
-        player2.addActionListener(new NewPlayer());
-        this.add(player2);
+        playerButton = new JButton();
+        playerButton.setBounds(20, 100, 130, 32);
+        playerButton.setText("Player 1");
+        playerButton.addActionListener(new NewPlayer());
+        this.add(playerButton);
 
         name = new JTextField();
         name.setBounds(182, 400, 80, 50);
         this.add(name);
+        
     }
+    
+    
 }
