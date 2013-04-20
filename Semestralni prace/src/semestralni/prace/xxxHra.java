@@ -10,16 +10,16 @@ import java.util.Scanner;
  *
  * @author user
  */
-public class Hra {
+public class xxxHra {
 
 
     public static void main(String[] args) {
         //inicializace
-        Terc terc = new Terc();
+        xxxTerc terc = new xxxTerc();
         terc.novaPoloha();
         
-        Podminky podminky = new Podminky();
-        Levely lvl = new Levely(1);
+        xxxPodminky podminky = new xxxPodminky();
+        xxxLevely lvl = new xxxLevely(1);
 
         Scanner scan = new Scanner(System.in);
         System.out.print("Zadej sve jmeno: "); // hrac zapne hru, zada sve jmeno
@@ -34,7 +34,7 @@ public class Hra {
 
         //nastaveni hodnot v ostatnich tridach
         Shot hod = new Shot();
-        Graf graf = new Graf();
+        xxxGraf graf = new xxxGraf();
         graf.setPodminky(podminky);
         hod.setPodminky(podminky);
         graf.setHrac(hrac);
@@ -88,7 +88,7 @@ public class Hra {
 
                 } else { //hrac dostava novy terc
                     hrac.setPocetMicu(hrac.getPocetMicu() + 2);
-                    terc = new Terc();
+                    terc = new xxxTerc();
                     terc.novaPoloha();
                     System.out.println("Mas novy terc " + terc.toString() + ", ziskavas dva mice navic!");
                 }
@@ -105,11 +105,11 @@ public class Hra {
 
         //ukladani do souboru
         
-        Vysledek prvni = Vysledek.nactiVysledky();
-        Vysledek novy = new Vysledek(hrac.getPlayerName(), hrac.zaokrouhlit());
+        xxxVysledek prvni = xxxVysledek.nactiVysledky();
+        xxxVysledek novy = new xxxVysledek(hrac.getPlayerName(), hrac.zaokrouhlit());
         prvni = prvni.ulozHraceDoVysledku(prvni, novy);
         System.out.println("");System.out.println("Vysledky:");
-        Vysledek.tisk(prvni);
-        Vysledek.zapisDat(prvni);
+        xxxVysledek.tisk(prvni);
+        xxxVysledek.zapisDat(prvni);
     }
 }

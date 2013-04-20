@@ -8,12 +8,12 @@ package semestralni.prace;
  *
  * @author user
  */
-public class Terc {
+public class xxxTerc {
 
     private Position poloha; // souradnice
     private double r; // polomer terce
 
-    public Terc() {
+    public xxxTerc() {
         this.poloha = new Position();
         this.r = 2;
     }

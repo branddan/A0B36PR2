@@ -12,21 +12,37 @@ import semestralni.prace.*;
  *
  * @author Daniel
  */
-public class Arrow extends JButton implements ActionListener{
+public class Arrow extends JButton implements ActionListener {
 
     private String direction;
-    private Helicopter attackingPlayer;
+    private GameWindow g;
+    private Helicopter playerAt;
+    private Helicopter playerDef;
 
-    public Arrow(String direction) {
+    public Arrow(String direction, String text) {
+        super(text);
         if (direction != null) {
             this.direction = direction;
         }
-    }
+        this.addActionListener(this);
 
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        attackingPlayer.move(direction);
+        g = (GameWindow) this.getParent().getParent().getParent().getParent();
+        playerAt = g.getPlayerAt();
+        playerDef = g.getPlayerDef();
+        playerAt.move(direction);
+        System.out.println(playerAt);
+        g.setMovesLeft(g.getMovesLeft() - 1);
+        System.out.println("moves " + g.getMovesLeft());
+        System.out.println("moves " + playerAt.getSpeed());
+        if (g.getMovesLeft() == 0) {
+            System.out.println("konec kola");
+            g.setPlayerAt(playerDef); // vymena hracu na konci kola
+            g.setPlayerDef(playerAt);
+            g.setMovesLeft(playerDef.getSpeed());
+        }
     }
-    
 }

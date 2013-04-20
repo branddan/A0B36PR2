@@ -10,14 +10,14 @@ package semestralni.prace;
  */
 public class Apache extends Helicopter {
 
+    
     public Apache(String jmeno) {
-        super.setPlayerName(jmeno);
+        super(jmeno);
         super.setType("Apache");
         super.setHealth(30);
         super.setMaxShotSpeed(55);
-        super.setFirepower(15);
+        super.setFirepower(1);
         super.setSize(2);
-        super.setMoves(3);
-        super.setPosition(new Position());
+        super.setSpeed(3);
     }
 }

@@ -18,26 +18,26 @@ import java.util.Scanner;
  * @author user
  */
 
-public class Vysledek {
+public class xxxVysledek {
     
     private String jmeno;
     private int skore;
-    private Vysledek next;
+    private xxxVysledek next;
     
     //nasledujou metody pro ukladani do souboru
     
-    public Vysledek(String jmeno, int skore) {
+    public xxxVysledek(String jmeno, int skore) {
         this.jmeno = jmeno;
         this.skore = skore;
         this.next = null;
     }
 
-    public static Vysledek nactiVysledky() {
+    public static xxxVysledek nactiVysledky() {
         try {
             Scanner scan = new Scanner(new FileInputStream("TOP10.txt"), "UTF8");
-            Vysledek[] poleVysledku = new Vysledek[10];
+            xxxVysledek[] poleVysledku = new xxxVysledek[10];
             for (int i = 0; i < poleVysledku.length; i++) {
-                poleVysledku[i] = new Vysledek(scan.next(),0);
+                poleVysledku[i] = new xxxVysledek(scan.next(),0);
                 poleVysledku[i].setSkore(scan.nextInt());
             }
             for (int i = 0; i < poleVysledku.length - 1; i++) {
@@ -49,10 +49,10 @@ public class Vysledek {
         return null;
     }
 
-    public static Vysledek ulozHraceDoVysledku(Vysledek prvni, Vysledek novy) {
+    public static xxxVysledek ulozHraceDoVysledku(xxxVysledek prvni, xxxVysledek novy) {
         int pocitadlo = 10;
         if (novy.getSkore() > prvni.getSkore()) {
-            Vysledek aktualni = prvni;
+            xxxVysledek aktualni = prvni;
             while (aktualni != null) {
                 if (aktualni.getNext() == null) {
                     aktualni.setNext(novy);
@@ -77,12 +77,12 @@ public class Vysledek {
         }
     }
 
-    public static void zapisDat(Vysledek start) {
+    public static void zapisDat(xxxVysledek start) {
         //zapíšeme textově data
         try {
             Writer out = new BufferedWriter(new OutputStreamWriter(
                     new FileOutputStream("TOP10.txt"), "UTF8"));
-            Vysledek aktualni = start;
+            xxxVysledek aktualni = start;
             while (aktualni != null) {
                 out.write((String) (aktualni.getJmeno() + " " + aktualni.getSkore() + " \n"));
                 aktualni = aktualni.getNext();
@@ -93,8 +93,8 @@ public class Vysledek {
         }
     }
 
-    public static void tisk(Vysledek start) {
-        Vysledek aktualni = start;
+    public static void tisk(xxxVysledek start) {
+        xxxVysledek aktualni = start;
         int poc = 10;
         System.out.println("poradi | jmeno |  body");
         while (aktualni != null) {
@@ -105,11 +105,11 @@ public class Vysledek {
         System.out.println("");
     }
 
-    public Vysledek getNext() {
+    public xxxVysledek getNext() {
         return next;
     }
 
-    public void setNext(Vysledek next) {
+    public void setNext(xxxVysledek next) {
         this.next = next;
     }
 

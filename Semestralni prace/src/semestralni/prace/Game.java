@@ -4,6 +4,7 @@
  */
 package semestralni.prace;
 
+import gui.*;
 import java.awt.*;
 
 /**
@@ -15,10 +16,7 @@ public class Game {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
-        Window w = new Window();
-        w.setVisible(true);
-        
-    }
+    Helicopter playerAt;
+    Helicopter playerDef;
+    Shot shot;
 }

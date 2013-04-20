@@ -17,14 +17,14 @@ public class Helicopter {
     private double firepower; //ovlivni damage
     private double maxShotSpeed; //ovlivni strmost drahy strely
     private double size; //velikost helikoptery
-    private int moves; //ovlivni pohybovych tahu
+    private int speed; //ovlivni pocet pohybovych tahu
     private int skore2; //mazat
     private boolean attack; //jestli je na tahu
 
-//    public Helicopter(String jmeno) {
-//        this.playerName = jmeno;
-//        this.position = new Position();
-//    }
+    public Helicopter(String jmeno) {
+        this.playerName = jmeno;
+        this.position = new Position();
+    }
     public Position getPosition() {
         return position;
     }
@@ -101,12 +101,12 @@ public class Helicopter {
         this.size = size;
     }
 
-    public int getMoves() {
-        return moves;
+    public int getSpeed() {
+        return speed;
     }
 
-    public void setMoves(int moves) {
-        this.moves = moves;
+    public void setSpeed(int moves) {
+        this.speed = moves;
     }
 
     public boolean isAttack() {
@@ -136,11 +136,11 @@ public class Helicopter {
             default:
                 break;
         }
-        this.setMoves(moves - 1);
+        //this.setSpeed(speed - 1);
     }
 
     @Override
     public String toString() {
-        return position.toString();
+        return "Player " + playerName + position.toString();
     }
 }

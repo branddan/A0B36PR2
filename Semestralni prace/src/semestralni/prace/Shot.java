@@ -33,11 +33,12 @@ public class Shot {
     public boolean hit() {
 
         double p1 = -9.8 / (2 * Math.pow(speed * Math.cos(angle), 2)); //pomocne konstanty
-        double p2 = (speed * Math.sin(angle)) / (speed * Math.cos(angle));
+        double p2 = Math.tan(angle); //(speed * Math.sin(angle)) / (speed * Math.cos(angle));
         double p3 = (playerAt.getPosition()).getY();
         boolean hit;
 
         if (Math.abs((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) <= playerDef.getSize()) {
+            damage();
             return hit = true;
         } else if (((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) >= playerDef.getSize()) {
             System.out.println("Moc vysoko, zkus to znovu.");
@@ -53,14 +54,24 @@ public class Shot {
     public void damage() {
 
         double p1 = -9.8 / (2 * Math.pow(speed * Math.cos(angle), 2)); //pomocne konstanty
-        double p2 = (speed * Math.sin(angle)) / (speed * Math.cos(angle));
+        double p2 = Math.tan(angle); //(speed * Math.sin(angle)) / (speed * Math.cos(angle));
         double p3 = (playerAt.getPosition()).getY();
+        
+        System.out.println("p1 " + p1);
+        System.out.println("p2 " + p2);
+        System.out.println("p3 " + p3);
 
-        double health1 = (Math.abs((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) / playerDef.getSize());
-        double health2 = (int) (Math.log(1 / health1) * 100);
-        double health3 = health2 / 10;
-        System.out.println("Zasah ubral " + health3 + " zivotu.");
-        playerAt.setHealth(playerAt.getHealth() + health3);
+        double health1 = (Math.abs((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()));
+        double health2 = health1 * playerAt.getFirepower() / playerDef.getSize() + playerDef.getSize()/2;
+        double health3 = (int) (Math.sqrt(1 / health1) * 100);
+        double health4 = health3 / 10;
+        
+        System.out.println("health1 " + health1);
+        System.out.println("health2 " + health3);
+        System.out.println("health3 " + health4);
+        playerAt.setHealth(playerAt.getHealth() - health4);
+        System.out.println("Zasah ubral " + health4 + " zivotu. Hraci zbyva " + playerAt.getHealth());
+
     }
 
     public double getSpeed() {
@@ -89,8 +100,6 @@ public class Shot {
         }
     }
 
-    
-
     public Helicopter getPlayerAt() {
         return playerAt;
     }
@@ -113,6 +122,6 @@ public class Shot {
 
     @Override
     public String toString() {
-        return "Hod{" + "v=" + speed + ", a=" + angle + '}';
+        return "Shot{" + "v=" + speed + ", a=" + angle + '}';
     }
 }

@@ -8,18 +8,18 @@ package semestralni.prace;
  *
  * @author user
  */
-public class Graf {
+public class xxxGraf {
 
     private double v;
     private double a;
-    private Podminky podminky;
-    private Terc terc;
+    private xxxPodminky podminky;
+    private xxxTerc terc;
     private Helicopter hrac;
 
-    public Graf() {
+    public xxxGraf() {
     }
 
-    public void vykresliVitr(Podminky podminky) {
+    public void vykresliVitr(xxxPodminky podminky) {
         //vykresli sipku vetru
         int delka = (int) (podminky.getVitr());
 
@@ -48,7 +48,7 @@ public class Graf {
 
     }
 
-    public void vykresliUvod(Helicopter hrac, Terc terc) {
+    public void vykresliUvod(Helicopter hrac, xxxTerc terc) {
         
         vykresliVitr(podminky);
         int[][] rovina = new int[20][100];
@@ -69,7 +69,7 @@ public class Graf {
         }
     }
 
-    public void vykresliPrubeh(Helicopter hrac, Terc terc) {
+    public void vykresliPrubeh(Helicopter hrac, xxxTerc terc) {
         
         vykresliVitr(podminky);
         double p1 = -podminky.getGravitace() / (2 * Math.pow(v * Math.cos(a) + podminky.getVitr(), 2)); //pomocne konstanty
@@ -117,19 +117,19 @@ public class Graf {
         this.a = a;
     }
 
-    public Podminky getPodminky() {
+    public xxxPodminky getPodminky() {
         return podminky;
     }
 
-    public void setPodminky(Podminky podminky) {
+    public void setPodminky(xxxPodminky podminky) {
         if (podminky != null) this.podminky = podminky;
     }
 
-    public Terc getTerc() {
+    public xxxTerc getTerc() {
         return terc;
     }
 
-    public void setTerc(Terc terc) {
+    public void setTerc(xxxTerc terc) {
         if (terc != null) this.terc = terc;
     }
 

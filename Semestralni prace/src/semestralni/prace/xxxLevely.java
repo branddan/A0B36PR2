@@ -8,14 +8,14 @@ package semestralni.prace;
  *
  * @author user
  */
-public class Levely {
+public class xxxLevely {
 
     private int lvl;
     private Helicopter hrac;
-    private Terc terc;
-    private Podminky podminky;
+    private xxxTerc terc;
+    private xxxPodminky podminky;
 
-    public Levely(int lvl) {
+    public xxxLevely(int lvl) {
         this.lvl = lvl;
     }
 
@@ -69,19 +69,19 @@ public class Levely {
         if (hrac != null) this.hrac = hrac;
     }
 
-    public Terc getTerc() {
+    public xxxTerc getTerc() {
         return terc;
     }
 
-    public void setTerc(Terc terc) {
+    public void setTerc(xxxTerc terc) {
         if (terc != null) this.terc = terc;
     }
 
-    public Podminky getPodminky() {
+    public xxxPodminky getPodminky() {
         return podminky;
     }
 
-    public void setPodminky(Podminky podminky) {
+    public void setPodminky(xxxPodminky podminky) {
         if (podminky != null) this.podminky = podminky;
     }
 }

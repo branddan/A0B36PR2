@@ -8,13 +8,13 @@ package semestralni.prace;
  *
  * @author user
  */
-public class Podminky {
+public class xxxPodminky {
     //prirodni podminky
 
     private double vitr;
     private double gravitace;
 
-    public Podminky() {
+    public xxxPodminky() {
         this.vitr = 10 - (int) (20 * Math.random());
         this.gravitace = 9.8;
     }

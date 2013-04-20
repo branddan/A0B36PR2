@@ -6,22 +6,25 @@ package semestralni.prace;
 
 import gui.*;
 
-
 /**
  *
  * @author Daniel
  */
 public class SemestralniPrace {
 
-    public void swich(){
-        
+    public void swich() {
     }
+
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        GameWindow o = new GameWindow();
-        o.setVisible(true);
-        
-        
+
+        IntroWindow i = new IntroWindow();
+        i.setVisible(true);
+//        GameWindow o = new GameWindow();
+//        o.setVisible(true);
+
+
+
+
     }
 }
