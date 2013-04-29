@@ -18,10 +18,11 @@ public class SemestralniPrace {
     public static void main(String[] args) {
         // TODO code application logic here
 
-        IntroWindow i = new IntroWindow();
-        i.setVisible(true);
+        
 //        GameWindow o = new GameWindow();
-//        o.setVisible(true);
+//        o.setVisible(true);\
+           IntroWindow intro = new IntroWindow();
+           intro.setVisible(true);
 
 
 
