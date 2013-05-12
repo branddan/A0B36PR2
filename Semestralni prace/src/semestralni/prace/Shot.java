@@ -17,7 +17,7 @@ public class Shot {
 
     public Shot(double speed, double angle) { //konstrukter
         this.speed = speed;//rychlost
-        this.angle = angle * Math.PI / 180; //prevod uhlu na radiany
+        this.angle = angle; //prevod uhlu na radiany
     }
 
     public Shot() {

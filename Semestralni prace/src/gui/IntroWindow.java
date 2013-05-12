@@ -28,8 +28,12 @@ public class IntroWindow extends JFrame {
     JTextField name;
     JLabel instrukce;
     Helicopter player;
+    JLabel text;
+    JPanel scheme;
+    JLabel img;
     int playerNumber = 0;
     GameWindow game = new GameWindow();
+    String path = System.getProperty("user.dir");
 
     public class NewPlayer implements ActionListener {
 
@@ -48,7 +52,6 @@ public class IntroWindow extends JFrame {
                     player = new BlackHawk(name.getText());
                 }
 
-                System.out.println("position " + player);
                 playerNumber++;
 
                 if (playerNumber == 1) {
@@ -57,7 +60,7 @@ public class IntroWindow extends JFrame {
                     playerButton.setText("Create 2nd player");
                     instrukce.setText("Player number 2, enter your name and choose your helicopter.");
                     instrukce.setForeground(Color.green);
-
+                    System.out.println("1: " + player);
                 } else if (playerNumber == 2) {
                     player.getPosition().createRandom(70, 90, 30, 70);
                     game.setPlayerDef(player);
@@ -65,11 +68,10 @@ public class IntroWindow extends JFrame {
                     IntroWindow i = (IntroWindow) button.getParent().getParent().getParent().getParent();
                     i.setVisible(false);
                     game.setVisible(true);
-                    System.out.println("name " + player.getPlayerName());
-                    System.out.println("type " + player.getType());
-                    System.out.println("Speed " + player.getMaxShotSpeed());
+                    game.open();
+                    System.out.println("2: " + player);
                 }
-                name.setText(null);
+                name.setText("Player 2");
             }
         }
 
@@ -77,24 +79,25 @@ public class IntroWindow extends JFrame {
             throw new UnsupportedOperationException("Not yet implemented");
         }
     }
-    
+
     public class Details implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println("1");
             if (e.getSource() == apache) {
-                System.out.println("2");
                 background.setImageName("apache.jpg");
-            }else if(e.getSource() == blackHawk){
-                System.out.println("3");
-                background = new Background("blackHawk.jpg");
-//                background.setImageName("blackHawk.jpg");
+                text.setText("<html><h2>AH-64 Apache</h2> <br> <i>The Boeing AH-64 Apache is a four-blade, twin-engine attack helicopter with a tailwheel-type landing gear arrangement, and a tandem cockpit for a two-man crew.</i> <br> <br> Swift and light, the Apache is ideal for outmaneuvre it's oponent. However, it’s reduced firepower and hull strength makes it vulnerable in frontal assaults.");
+                img.setIcon(new ImageIcon(path + "\\images\\apacheScheme.png"));
+            } else if (e.getSource() == blackHawk) {
+                background.setImageName("blackHawk.jpg");
+                text.setText("<html><h2>UH-60 Black Hawk</h2> <br> <i>The Sikorsky UH-60 Black Hawk is a four-bladed, twin-engine, medium-lift utility helicopter manufactured by Sikorsky Aircraft. The Black Hawk's consists of two pilots, two gunners and up to 11 troops. </i> <br> <br> Heavily armored and armed, the Black Hawk is a flying colossus with a great firepower but somewhat slow and clumsy.");
+                img.setIcon(new ImageIcon(path + "\\images\\blackHawkScheme.png"));
             }
+            
             JRadioButton button = (JRadioButton) e.getSource();
             IntroWindow i = (IntroWindow) button.getParent().getParent().getParent().getParent();
             i.add(background);
+            
         }
-        
     }
 
     public IntroWindow() throws HeadlessException {
@@ -107,7 +110,17 @@ public class IntroWindow extends JFrame {
 
 
 
+        text = new JLabel();
+        text.setBounds(0, 276, 200, 245);
+        this.add(text);
 
+        scheme = new JPanel();
+        scheme.setBounds(0, 141, 200, 134);
+        img = new JLabel();
+        scheme.setBackground(Color.white);
+        scheme.setOpaque(false);
+        scheme.add(img);
+        this.add(scheme);
 
         instrukce = new JLabel();
         instrukce.setBounds(0, 543, 800, 30);
@@ -119,27 +132,27 @@ public class IntroWindow extends JFrame {
         chose = new ButtonGroup();
 
         apache = new JRadioButton();
-        apache.setBounds(50, 20, 100, 30);
+        apache.setBounds(0, 50, 200, 30);
         apache.setText("Apache");
         apache.addActionListener(new Details());
         chose.add(apache);
         this.add(apache);
 
         blackHawk = new JRadioButton();
-        blackHawk.setBounds(50, 50, 100, 30);
+        blackHawk.setBounds(0, 80, 200, 30);
         blackHawk.setText("Black Hawk");
         blackHawk.addActionListener(new Details());
         chose.add(blackHawk);
         this.add(blackHawk);
 
         playerButton = new JButton();
-        playerButton.setBounds(20, 100, 130, 32);
+        playerButton.setBounds(0, 110, 200, 32);
         playerButton.setText("Create 1st player");
         playerButton.addActionListener(new NewPlayer());
         this.add(playerButton);
 
-        name = new JTextField();
-        name.setBounds(182, 400, 80, 50);
+        name = new JTextField("Player 1");
+        name.setBounds(0, 0, 200, 50);
         this.add(name);
 
         background = new Background("blackHawk.jpg");

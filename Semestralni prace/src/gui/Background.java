@@ -16,24 +16,15 @@ public class Background extends JPanel {
     // The Image to store the background image in.
     private Image img;
     private String imageName;
+    private JLabel image = new JLabel();
+    private String path = System.getProperty("user.dir");
 
     public Background(String imageName) {
         // Loads the background image and stores in img object.
         setImageName(imageName);
-        this.setOpaque(false);
     }
 
-    public void paintComponent(Graphics g) {
-        g.drawImage(img, 0, 0, getSize().width, getSize().height, this);
-    }
 
-    public Image getImg() {
-        return img;
-    }
-
-    public void setImg(Image img) {
-        this.img = img;
-    }
 
     public String getImageName() {
         return imageName;
@@ -41,9 +32,9 @@ public class Background extends JPanel {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
-        String path = System.getProperty("user.dir");
-        img = Toolkit.getDefaultToolkit().createImage(path + "\\images\\" + imageName);
-        painComponent(img);
+        image.setIcon(new ImageIcon(path + "\\images\\" + imageName));
+        this.add(image);
+        validate();
     }
     
 }

@@ -16,6 +16,12 @@ public class Position {
         x = 0;
         y = 0;        
     }
+
+    public Position(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+    
     
     public void createRandom (double x1, double x2, double y1, double y2){ //naplni polohu nahodnymi hodnotami z intervalu
         this.x = (int) (x1 + (x2-x1) * Math.random());

@@ -18,9 +18,11 @@ public class Arrow extends JButton implements ActionListener {
     private GameWindow g;
     private Helicopter playerAt;
     private Helicopter playerDef;
+    private String path = System.getProperty("user.dir");
 
-    public Arrow(String direction, String text) {
-        super(text);
+    public Arrow(String direction) {
+//        super(text);
+        this.setImage(direction + ".png");
         if (direction != null) {
             this.direction = direction;
         }
@@ -44,5 +46,10 @@ public class Arrow extends JButton implements ActionListener {
             g.setPlayerDef(playerAt);
             g.setMovesLeft(playerDef.getSpeed());
         }
+    }
+
+    public void setImage(String imageName) {
+        this.setIcon(new ImageIcon(path + "\\images\\" + imageName));
+        validate();
     }
 }
