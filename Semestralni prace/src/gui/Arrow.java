@@ -4,6 +4,7 @@
  */
 package gui;
 
+import gui.GameWindow.*;
 import java.awt.event.*;
 import javax.swing.*;
 import semestralni.prace.*;
@@ -40,9 +41,13 @@ public class Arrow extends JButton implements ActionListener {
         g.setMovesLeft(g.getMovesLeft() - 1);
         System.out.println("moves " + g.getMovesLeft());
         System.out.println("moves " + playerAt.getSpeed());
+        g.doMove();
         if (g.getMovesLeft() == 0) {
             System.out.println("konec kola");
             g.setPlayerAt(playerDef); // vymena hracu na konci kola
+            HelicoIcon helico = g.getHelicoDef();
+            g.setHelicoDef(g.getHelicoAt());
+            g.setHelicoAt(helico);
             g.setPlayerDef(playerAt);
             g.setMovesLeft(playerDef.getSpeed());
         }

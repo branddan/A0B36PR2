@@ -20,7 +20,6 @@ public class DraggingListener implements MouseListener {
     double angle;
     double speed;
     boolean pressed;
-
     public DraggingListener() {
     }
 
@@ -33,7 +32,10 @@ public class DraggingListener implements MouseListener {
         pressed = true;
         coordinatesPress = new Position(e.getX(), e.getY());
         System.out.println("Press ( " + e.getX() + " , " + e.getY() + " )");
-
+        JLabel l = (JLabel) e.getSource();
+        GameWindow g = (GameWindow) l.getParent().getParent().getParent().getParent();
+        g.getD().setX0(e.getX());
+        g.getD().setY0(e.getY());
     }
 
     @Override

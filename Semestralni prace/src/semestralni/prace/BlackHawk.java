@@ -15,7 +15,7 @@ public class BlackHawk extends Helicopter{
         super(jmeno);
         super.setType("Black Hawk");
         super.setHealth(50);
-        super.setMaxShotSpeed(45);
+        super.setMaxShotSpeed(100);
         super.setFirepower(2);
         super.setSize(4);
         super.setSpeed(2);

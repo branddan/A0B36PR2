@@ -122,16 +122,16 @@ public class Helicopter {
     public void move(String direction) {
         switch (direction) {
             case "up":
-                this.position.setY(this.getPosition().getY() + 5);
+                this.position.setY(this.getPosition().getY() - 30);
                 break;
             case "right":
-                this.position.setX(this.getPosition().getX() + 5);
+                this.position.setX(this.getPosition().getX() + 30);
                 break;
             case "down":
-                this.position.setY(this.getPosition().getY() - 5);
+                this.position.setY(this.getPosition().getY() + 30);
                 break;
             case "left":
-                this.position.setX(this.getPosition().getX() - 5);
+                this.position.setX(this.getPosition().getX() - 30);
                 break;
             default:
                 break;

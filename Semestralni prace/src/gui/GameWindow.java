@@ -17,7 +17,6 @@ import semestralni.prace.*;
  */
 public class GameWindow extends JFrame {
 
-//    private Shot shot = new Shot();
     private Game game = new Game();
     private JButton fire;
     private Arrow stay;
@@ -26,17 +25,17 @@ public class GameWindow extends JFrame {
     private Arrow right;
     private Arrow left;
     private JLabel control;
-    private JTextField angle;
-    private JTextField speed;
-    private HelicoIcon helico1;
-    private HelicoIcon helico2;
+    private JLabel shotInfo;
+    private JLabel instrukce;
+    private HelicoIcon helicoAt;
+    private HelicoIcon helicoDef;
     private Helicopter playerAt;
     private Helicopter playerDef;
     private int movesLeft;
     private int x = 250;
     private int y = 350;
-    Dragg d = new Dragg();
-    Background background;
+    private Dragg d = new Dragg();
+    private Background background;
 
 //    public void paint(Graphics g){
 ////        g.clearRect(0, 0, 1500, 1500);
@@ -49,7 +48,7 @@ public class GameWindow extends JFrame {
     public class HelicoIcon extends JPanel {
 
         public HelicoIcon(Helicopter helico) {
-            this.setBounds((int) helico.getPosition().getX() + 400, (int) helico.getPosition().getY() + 200, 60, 20);
+            this.setBounds((int) helico.getPosition().getX(), (int) helico.getPosition().getY(), 60, 20);
             JLabel image = new JLabel();
             image.setIcon(new ImageIcon("" + System.getProperty("user.dir") + "\\images\\" + helico.getType() + "Icon.jpg"));
             this.add(image);
@@ -77,26 +76,6 @@ public class GameWindow extends JFrame {
         }
     }
 
-    public class TextAngleField implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            double value = Double.parseDouble(angle.getText());
-            game.getShot().setAngle(value);
-            System.out.println("angle: " + game.getShot().getAngle());
-        }
-    }
-
-    public class TextSpeedField implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            double value = Double.parseDouble(speed.getText());
-            game.getShot().setSpeed(value);
-            System.out.println("speed: " + game.getShot().getSpeed());
-        }
-    }
-
     public class ShotResolve implements ActionListener {
 
         @Override
@@ -118,13 +97,11 @@ public class GameWindow extends JFrame {
         fire = new JButton();
         fire.setBounds(20, 300, 80, 50);
         fire.setText("FIRE");
-        fire.addActionListener(new TextAngleField());
-        fire.addActionListener(new TextSpeedField());
         fire.addActionListener(new ShotResolve());
-        this.add(fire);
+//        this.add(fire);
 
         control = new JLabel();
-        control.setBounds(200, 300, 100, 100);
+        control.setBounds(210, 400, 140, 140);
         control.addMouseListener(new DraggingListener());
         control.addMouseMotionListener(d);
         control.setText("control");
@@ -132,33 +109,40 @@ public class GameWindow extends JFrame {
         control.setBackground(Color.red);
         this.add(control);
 
+        shotInfo = new JLabel("<html>Speed: " + 0 + "<br>Angle: " + 0);
+        shotInfo.setBounds(210, 330, 140, 70);
+        this.add(shotInfo);
+
+        instrukce = new JLabel();
+        instrukce.setBounds(0, 543, 800, 30);
+        instrukce.setText("Player number 1, enter your name and choose your helicopter.");
+        instrukce.setForeground(Color.green);
+        this.add(instrukce);
+        instrukce.setOpaque(true);
+        instrukce.setBackground(Color.BLACK);
+
         stay = new Arrow("stay");
-        stay.setBounds(72, 72, 70, 70);
+        stay.setBounds(70, 400, 70, 70);
         this.add(stay);
 
         up = new Arrow("up");
-        up.setBounds(72, 2, 70, 70);
+        up.setBounds(70, 330, 70, 70);
         this.add(up);
 
         down = new Arrow("down");
-        down.setBounds(72, 143, 70, 70);
+        down.setBounds(70, 470, 70, 70);
         this.add(down);
 
         left = new Arrow("left");
-        left.setBounds(2, 72, 70, 70);
+        left.setBounds(0, 400, 70, 70);
         this.add(left);
 
         right = new Arrow("right");
-        right.setBounds(143, 72, 70, 70);
+        right.setBounds(140, 400, 70, 70);
         this.add(right);
 
-        angle = new JTextField();
-        angle.setBounds(182, 400, 80, 50);
-        this.add(angle);
 
-        speed = new JTextField();
-        speed.setBounds(100, 400, 80, 50);
-        this.add(speed);
+
 
         background = new Background("Desert.jpg");
         background.setBounds(0, 0, 800, 600);
@@ -168,8 +152,12 @@ public class GameWindow extends JFrame {
 
     public void open() {
         this.setVisible(true);
-        this.add(helico1);
-        this.add(helico2);
+        this.add(helicoAt);
+        this.add(helicoDef);
+    }
+    
+    public void doMove(){
+        helicoAt.setLocation((int)playerAt.getPosition().getX(), (int)playerAt.getPosition().getY());
     }
 
     public Helicopter getPlayerAt() {
@@ -182,7 +170,7 @@ public class GameWindow extends JFrame {
         game.setPlayerAt(playerAt);
         movesLeft = playerAt.getSpeed();
 
-        helico1 = new HelicoIcon(playerAt);
+        helicoAt = new HelicoIcon(playerAt);
     }
 
     public Helicopter getPlayerDef() {
@@ -194,7 +182,7 @@ public class GameWindow extends JFrame {
         this.playerDef = playerDef;
         game.setPlayerDef(playerDef);
 
-        helico2 = new HelicoIcon(playerDef);
+        helicoDef = new HelicoIcon(playerDef);
     }
 
     public int getMovesLeft() {
@@ -212,4 +200,37 @@ public class GameWindow extends JFrame {
     public void setGame(Game game) {
         this.game = game;
     }
+
+    public JLabel getShotInfo() {
+        return shotInfo;
+    }
+
+    public void setShotInfo(JLabel shotInfo) {
+        this.shotInfo = shotInfo;
+    }
+
+    public Dragg getD() {
+        return d;
+    }
+
+    public void setD(Dragg d) {
+        this.d = d;
+    }
+
+    public HelicoIcon getHelicoAt() {
+        return helicoAt;
+    }
+
+    public void setHelicoAt(HelicoIcon helicoAt) {
+        this.helicoAt = helicoAt;
+    }
+
+    public HelicoIcon getHelicoDef() {
+        return helicoDef;
+    }
+
+    public void setHelicoDef(HelicoIcon helicoDef) {
+        this.helicoDef = helicoDef;
+    }
+    
 }

@@ -15,7 +15,7 @@ public class Apache extends Helicopter {
         super(jmeno);
         super.setType("Apache");
         super.setHealth(30);
-        super.setMaxShotSpeed(55);
+        super.setMaxShotSpeed(120);
         super.setFirepower(1);
         super.setSize(2);
         super.setSpeed(3);

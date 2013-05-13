@@ -19,21 +19,21 @@ import java.awt.Toolkit;
  */
 public class IntroWindow extends JFrame {
 
-    Background background;
-    JButton playerButton;
-    JButton player2;
-    JRadioButton apache;
-    JRadioButton blackHawk;
-    ButtonGroup chose;
-    JTextField name;
-    JLabel instrukce;
-    Helicopter player;
-    JLabel text;
-    JPanel scheme;
-    JLabel img;
-    int playerNumber = 0;
-    GameWindow game = new GameWindow();
-    String path = System.getProperty("user.dir");
+    private Background background;
+    private JButton playerButton;
+    private JButton player2;
+    private JRadioButton apache;
+    private JRadioButton blackHawk;
+    private ButtonGroup chose;
+    private JTextField name;
+    private JLabel instrukce;
+    private Helicopter player;
+    private JLabel text;
+    private JPanel scheme;
+    private JLabel img;
+    private int playerNumber = 0;
+    private GameWindow game = new GameWindow();
+    private String path = System.getProperty("user.dir");
 
     public class NewPlayer implements ActionListener {
 
