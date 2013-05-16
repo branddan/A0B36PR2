@@ -4,6 +4,8 @@
  */
 package semestralni.prace;
 
+import gui.GameWindow;
+
 /**
  *
  * @author user
@@ -14,6 +16,8 @@ public class Shot {
     private double angle; // uhel
     private Helicopter playerAt;
     private Helicopter playerDef;
+    private Game game;
+    private GameWindow gw;
 
     public Shot(double speed, double angle) { //konstrukter
         this.speed = speed;//rychlost
@@ -23,55 +27,67 @@ public class Shot {
     public Shot() {
     }
 
-    public int bod(int x) { //vrati y-ovou souradnici pro dane x
+    public int bod(int x, Helicopter playerAt, Helicopter playerDef) { //vrati y-ovou souradnici pro dane x
         double p1 = -9.8 / (2 * Math.pow(speed * Math.cos(angle), 2)); //pomocne konstanty
         double p2 = (speed * Math.sin(angle)) / (speed * Math.cos(angle));
         double p3 = (playerAt.getPosition()).getY();
         return (int) (p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3);
     }
 
-    public boolean hit() {
+    public boolean hit(double x, double y) {
 
-        double p1 = -9.8 / (2 * Math.pow(speed * Math.cos(angle), 2)); //pomocne konstanty
-        double p2 = Math.tan(angle); //(speed * Math.sin(angle)) / (speed * Math.cos(angle));
-        double p3 = (playerAt.getPosition()).getY();
-        boolean hit;
-
-        if (Math.abs((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) <= playerDef.getSize()) {
-            damage();
-            return hit = true;
-        } else if (((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) >= playerDef.getSize()) {
-            System.out.println("Moc vysoko, zkus to znovu.");
-
-            return hit = false;
-        } else {
-            System.out.println("Moc nizko, zkus to znovu.");
-
-            return hit = false;
+//        System.out.println("pomer " + (y/x));
+        double y1 = playerDef.getPosition().getY() - playerAt.getPosition().getY();
+        double x1 = playerDef.getPosition().getX() - playerAt.getPosition().getX();
+        if (Math.abs(Math.atan(y/x)-Math.atan(y1/x1)) < playerDef.getSize()) {
+//            System.out.println("zasah");
+            damage(x,y);
+            return true;
+        }else{
+//            System.out.println("nezasah");
+            return false;
         }
+//        if (Math.abs((playerDef.getPosition().getX()) * (y/x) + playerAt.getPosition().getY() - playerDef.getPosition().getX()) <= playerDef.getSize()) {
+//            System.out.println("zasah");
+//            return true;
+//        }else{
+//            System.out.println("nezasah");
+//            return false;
+//        }
+//        double p1 = -9.8 / (2 * Math.pow(speed * Math.cos(angle), 2)); //pomocne konstanty
+//        double p2 = Math.tan(angle); //(speed * Math.sin(angle)) / (speed * Math.cos(angle));
+//        double p3 = (playerAt.getPosition()).getY();
+//        boolean hit;
+//
+//        if (Math.abs((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) <= playerDef.getSize()) {
+//            damage();
+//            return hit = true;
+//        } else if (((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()) >= playerDef.getSize()) {
+//            System.out.println("Moc vysoko, zkus to znovu.");
+//
+//            return hit = false;
+//        } else {
+//            System.out.println("Moc nizko, zkus to znovu.");
+//
+//            return hit = false;
+//        }
     }
 
-    public void damage() {
+    public void damage(double x, double y) {
 
-        double p1 = -9.8 / (2 * Math.pow(speed * Math.cos(angle), 2)); //pomocne konstanty
-        double p2 = Math.tan(angle); //(speed * Math.sin(angle)) / (speed * Math.cos(angle));
-        double p3 = (playerAt.getPosition()).getY();
+        double y1 = playerDef.getPosition().getY() - playerAt.getPosition().getY();
+        double x1 = playerDef.getPosition().getX() - playerAt.getPosition().getX();
         
-        System.out.println("p1 " + p1);
-        System.out.println("p2 " + p2);
-        System.out.println("p3 " + p3);
-
-        double health1 = (Math.abs((p1 * Math.pow((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX(), 2) + p2 * ((playerDef.getPosition()).getX() - (playerAt.getPosition()).getX()) + p3) - (playerDef.getPosition()).getY()));
-        double health2 = health1 * playerAt.getFirepower() / playerDef.getSize() + playerDef.getSize()/2;
+        double health1 = (Math.abs(Math.atan(y/x)-Math.atan(y1/x1))/playerDef.getSize());
         double health3 = (int) (Math.sqrt(1 / health1) * 100);
-        double health4 = health3 / 10;
+        double health4 = game.getPlayerAt().getFirepower() * health3 / 10;
         
-        System.out.println("health1 " + health1);
-        System.out.println("health2 " + health3);
-        System.out.println("health3 " + health4);
-        playerAt.setHealth(playerAt.getHealth() - health4);
-        System.out.println("Zasah ubral " + health4 + " zivotu. Hraci zbyva " + playerAt.getHealth());
-
+        game.getPlayerDef().setHealth(game.getPlayerDef().getHealth() - health4);
+        game.getGameW().getInstructions().setText("Zasah ubral " + health4 + " zivotu. Hraci zbyva " + game.getPlayerDef().getHealth());
+        if (game.getPlayerDef().getHealth() <= 0) {
+            game.getGameW().getInstructions().setText(this.game.getPlayerDef().getPlayerName() + " is down. " + game.getPlayerAt().getPlayerName() + " won!");
+        }
+        game.getGameW().getPlayer1Info().setText("<html><h3>" + game.getPlayerAt().getPlayerName() + "</h3><br>HP: " + game.getPlayerAt().getHealth() + "<br><br><h3>" + game.getPlayerDef().getPlayerName() + "</h3><br>HP: " + game.getPlayerDef().getHealth());
     }
 
     public double getSpeed() {
@@ -79,12 +95,8 @@ public class Shot {
     }
 
     public void setSpeed(double speed) {
-        if (speed > playerAt.getMaxShotSpeed() || speed < 0) { // rychlost je omezena podle parametru helikoptery
-            System.out.println("Zadana hodnota mimo povoleny interval, zadej znovu.");
-            System.out.println("");
-        } else {
+        
             this.speed = speed;
-        }
     }
 
     public double getAngle() {
@@ -93,8 +105,8 @@ public class Shot {
 
     public void setAngle(double angle) {
         if (Math.abs(angle) > 90) { // uhel je omezen na -90-90
-            System.out.println("Zadana hodnota mimo povoleny interval, zadej znovu.");
-            System.out.println("");
+//            System.out.println("Zadana hodnota mimo povoleny interval, zadej znovu.");
+//            System.out.println("");
         } else {
             this.angle = Math.PI * angle / 180;
         }
@@ -118,6 +130,14 @@ public class Shot {
         if (player != null) {
             this.playerDef = player;
         }
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     @Override

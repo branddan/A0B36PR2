@@ -13,12 +13,12 @@ public class BlackHawk extends Helicopter{
     
     public BlackHawk(String jmeno) {
         super(jmeno);
-        super.setType("Black Hawk");
-        super.setHealth(50);
+        super.setType("BlackHawk");
+        super.setHealth(100);
         super.setMaxShotSpeed(100);
-        super.setFirepower(2);
-        super.setSize(4);
-        super.setSpeed(2);
+        super.setFirepower(1.5);
+        super.setSize(0.25);
+        super.setSpeed(4);
     }
     
 }

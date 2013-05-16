@@ -15,11 +15,12 @@ import java.awt.Graphics;
  */
 public class DraggingListener implements MouseListener {
 
-    Position coordinatesPress;
-    Position coordinatesRelease;
-    double angle;
-    double speed;
-    boolean pressed;
+    private Position coordinatesPress;
+    private Position coordinatesRelease;
+    private double angle;
+    private double speed;
+    private boolean pressed;
+    
     public DraggingListener() {
     }
 
@@ -30,19 +31,17 @@ public class DraggingListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         pressed = true;
-        coordinatesPress = new Position(e.getX(), e.getY());
-        System.out.println("Press ( " + e.getX() + " , " + e.getY() + " )");
-        JLabel l = (JLabel) e.getSource();
-        GameWindow g = (GameWindow) l.getParent().getParent().getParent().getParent();
-        g.getD().setX0(e.getX());
-        g.getD().setY0(e.getY());
+        coordinatesPress = new Position(105, 105);
+//        System.out.println("Press " + coordinatesPress);
+        GameWindow.Control p = (GameWindow.Control) e.getSource();
+        GameWindow g = (GameWindow) p.getParent().getParent().getParent().getParent();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
         pressed = false;
         coordinatesRelease = new Position(e.getX(), e.getY());
-        System.out.println("Release ( " + e.getX() + " , " + e.getY() + " )");
+//        System.out.println("Release ( " + e.getX() + " , " + e.getY() + " )");
         double x = coordinatesRelease.getX() - coordinatesPress.getX();
         double y = coordinatesRelease.getY() - coordinatesPress.getY();
         speed = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
@@ -53,14 +52,28 @@ public class DraggingListener implements MouseListener {
         if (speed == 0) {
             angle = 0;
         }
-        System.out.println("");
-        System.out.println("speed ( " + speed + " , angle " + Math.toDegrees(angle) + " )");
-        System.out.println("");
-
-        JLabel l = (JLabel) e.getSource();
-        GameWindow g = (GameWindow) l.getParent().getParent().getParent().getParent();
+//        System.out.println("");
+//        System.out.println("speed ( " + speed + " , angle " + Math.toDegrees(angle) + " )");
+//        System.out.println("");
         
-        g.getGame().setShot(new Shot(speed, angle));
+        
+        GameWindow.Control p = (GameWindow.Control) e.getSource();
+        GameWindow g = (GameWindow) p.getParent().getParent().getParent().getParent();
+        g.getGame().getShot().setAngle(angle);
+        g.getGame().getShot().setSpeed(speed);
+        GameWindow.Screen s = (GameWindow.Screen) g.getScreen();
+        s.setXY(100*(int)x,100*(int)y);
+        s.repaint();
+        g.getGame().getShot().setPlayerAt(g.getPlayerAt());
+        g.getGame().getShot().setPlayerDef(g.getPlayerDef());
+        g.setHit(g.getGame().getShot().hit(x, y));
+        
+        
+        g.setMovesLeft(g.getMovesLeft() - 2);
+    }
+
+    public boolean isPressed() {
+        return pressed;
     }
 
     @Override

@@ -5,6 +5,7 @@
 package gui;
 
 import gui.GameWindow.*;
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 import semestralni.prace.*;
@@ -22,7 +23,6 @@ public class Arrow extends JButton implements ActionListener {
     private String path = System.getProperty("user.dir");
 
     public Arrow(String direction) {
-//        super(text);
         this.setImage(direction + ".png");
         if (direction != null) {
             this.direction = direction;
@@ -36,21 +36,68 @@ public class Arrow extends JButton implements ActionListener {
         g = (GameWindow) this.getParent().getParent().getParent().getParent();
         playerAt = g.getPlayerAt();
         playerDef = g.getPlayerDef();
-        playerAt.move(direction);
-        System.out.println(playerAt);
-        g.setMovesLeft(g.getMovesLeft() - 1);
-        System.out.println("moves " + g.getMovesLeft());
-        System.out.println("moves " + playerAt.getSpeed());
-        g.doMove();
-        if (g.getMovesLeft() == 0) {
-            System.out.println("konec kola");
-            g.setPlayerAt(playerDef); // vymena hracu na konci kola
-            HelicoIcon helico = g.getHelicoDef();
-            g.setHelicoDef(g.getHelicoAt());
-            g.setHelicoAt(helico);
-            g.setPlayerDef(playerAt);
-            g.setMovesLeft(playerDef.getSpeed());
+        boolean out = false;
+        switch (direction) {
+            case "up": {
+                if (playerAt.getPosition().getY() + 10 - 20 <= 0) {
+                    System.out.println("up" + playerAt);
+                    outofScreen(g);
+                    out = true;
+                }
+            }
+            break;
+            case "down": {
+                if (playerAt.getPosition().getY() + 20 >= 320) {
+                    outofScreen(g);
+                    System.out.println("down" + playerAt);
+                    out = true;
+                }
+            }
+            break;
+            case "left": {
+                if (playerAt.getPosition().getX() + 23 - 30 <= 0) {
+                    outofScreen(g);
+                    System.out.println("left" + playerAt);
+                    out = true;
+                }
+            }
+            break;
+            case "right": {
+                if (playerAt.getPosition().getX() + 50 + 30 >= 800) {
+                    outofScreen(g);
+                    System.out.println("right" + playerAt);
+                    out = true;
+                }
+            }
+            break;
         }
+        if (!out) {
+            playerAt.move(direction);
+            System.out.println(playerAt);
+            g.move();
+            g.setMovesLeft(g.getMovesLeft() - 1);
+            System.out.println("moves " + g.getMovesLeft());
+            System.out.println("moves " + playerAt.getSpeed());
+            g.getScreen().repaint();
+            g.getInstructions().setForeground(Color.green);
+            g.getInstructions().setText("Player " + playerAt.getPlayerName() + ", you have " + g.getMovesLeft() + " moves left, you can move (for 1 move point) of fire (2 moves).");
+            if (g.getMovesLeft() <= 0) {
+                System.out.println("konec kola");
+                g.setPlayerAt(playerDef); // vymena hracu na konci kola
+                HelicoIcon helico = g.getHelicoDef();
+                g.setHelicoDef(g.getHelicoAt());
+                g.setHelicoAt(helico);
+                g.setPlayerDef(playerAt);
+                g.setMovesLeft(playerDef.getSpeed());
+                g.getInstructions().setText("Player " + playerAt.getPlayerName() + ", it's your turn, you can move (for 1 move point) of fire (2 moves).");
+            }
+        }
+
+    }
+
+    private void outofScreen(GameWindow g) {
+        g.getInstructions().setForeground(Color.orange);
+        g.getInstructions().setText("You cannot move further");
     }
 
     public void setImage(String imageName) {

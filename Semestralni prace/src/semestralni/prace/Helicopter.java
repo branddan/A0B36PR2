@@ -4,12 +4,15 @@
  */
 package semestralni.prace;
 
+import java.awt.Color;
+
 /**
  *
  * @author user
  */
 public class Helicopter {
 
+    private Game game;
     private Position position;
     private String playerName;
     private String type; //Apache nebo Black Hawk
@@ -18,7 +21,6 @@ public class Helicopter {
     private double maxShotSpeed; //ovlivni strmost drahy strely
     private double size; //velikost helikoptery
     private int speed; //ovlivni pocet pohybovych tahu
-    private int skore2; //mazat
     private boolean attack; //jestli je na tahu
 
     public Helicopter(String jmeno) {
@@ -53,19 +55,12 @@ public class Helicopter {
         return health;
     }
 
-    public void setHealth(double skore) {
-        if (skore >= 0) {
-            this.health = skore;
-        }
-    }
-
-    public int getSkore2() {
-        return skore2;
-    }
-
-    public void setSkore2(int skore2) {
-        if (skore2 >= 0) {
-            this.skore2 = skore2;
+    public void setHealth(double health) {
+        if (health <= 0) {
+            this.health = 0;
+            game.getGameW().getInstructions().setForeground(Color.red);
+        }else{
+            this.health = health;
         }
     }
 
@@ -136,6 +131,7 @@ public class Helicopter {
             default:
                 break;
         }
+        this.game.getGameW().move();
         //this.setSpeed(speed - 1);
     }
 
@@ -143,4 +139,13 @@ public class Helicopter {
     public String toString() {
         return "Player " + playerName + position.toString();
     }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+    
 }

@@ -20,6 +20,8 @@ public class Game {
     private Helicopter playerAt;
     private Helicopter playerDef;
     private Shot shot;
+    private GameWindow gameW;
+    
 
     public static void main(String[] args) {
         // TODO code application logic here
@@ -38,9 +40,9 @@ public class Game {
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
-        IntroWindow intro = new IntroWindow();
-        intro.setVisible(true);
-
+        IntroWindow introW = new IntroWindow();
+        introW.setVisible(true);
+        
 
 
 
@@ -52,7 +54,9 @@ public class Game {
 
     public void setPlayerAt(Helicopter playerAt) {
         this.playerAt = playerAt;
+        this.playerAt.setGame(this);
         shot.setPlayerAt(playerAt);
+        shot.setGame(this);
     }
 
     public Helicopter getPlayerDef() {
@@ -61,6 +65,7 @@ public class Game {
 
     public void setPlayerDef(Helicopter playerDef) {
         this.playerDef = playerDef;
+        this.playerDef.setGame(this);
         shot.setPlayerDef(playerDef);
     }
 
@@ -70,6 +75,14 @@ public class Game {
 
     public void setShot(Shot shot) {
         this.shot = shot;
+    }
+
+    public GameWindow getGameW() {
+        return gameW;
+    }
+
+    public void setGameW(GameWindow gameW) {
+        this.gameW = gameW;
     }
     
     

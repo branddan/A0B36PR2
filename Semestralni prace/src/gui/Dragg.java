@@ -18,39 +18,36 @@ public class Dragg implements MouseMotionListener {
     private GameWindow g;
     private int x = 10;
     private int y = 10;
-    private int x0;
-    private int y0;
-
-    public void paint(Graphics g) {
-        g.clearRect(0, 0, 1500, 1500);
-        g.drawLine(250, 350, x + 250, y + 350);
-    }
+    private double pomer = x / y;
+    private final int x0 = 105;
+    private final int y0 = 105;
 
     public void mouseDragged(MouseEvent e) {
 //        System.out.println("x " + e.toString());
 
         x = e.getX();
         y = e.getY();
-        JLabel l = (JLabel) e.getSource();
-        g = (GameWindow) l.getParent().getParent().getParent().getParent();
-        g.repaint();
-//        System.out.println("x " + e.getX());
+        GameWindow.Control p = (GameWindow.Control) e.getSource();
+        g = (GameWindow) p.getParent().getParent().getParent().getParent();
         x = e.getX() - x0;
         y = e.getY() - y0;
-        int speed = (int)Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
+        int speed = (int) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         int angle;
-        
-        if (speed > g.getPlayerAt().getMaxShotSpeed()) {
-            speed = (int)g.getPlayerAt().getMaxShotSpeed();
-        }
+        p.setSpeed(speed);
 
+        if (speed > g.getPlayerAt().getMaxShotSpeed()) {
+            speed = (int) g.getPlayerAt().getMaxShotSpeed();
+        }
+        p.setSpeed(speed);
         if (y == 0) {
             angle = 0;
         } else {
-            angle = (int)Math.toDegrees(Math.atan(x / y));
+            angle = (int) Math.toDegrees(Math.atan(pomer));
         }
+        p.setX(x + 105);
+        p.setY(y + 105);
 
-        g.getShotInfo().setText("<html>Speed: " + speed + "<br>Angle: " + angle);
+        p.repaint();
     }
 
     @Override
@@ -61,15 +58,7 @@ public class Dragg implements MouseMotionListener {
         return x0;
     }
 
-    public void setX0(int x0) {
-        this.x0 = x0;
-    }
-
     public int getY0() {
         return y0;
-    }
-
-    public void setY0(int y0) {
-        this.y0 = y0;
     }
 }

@@ -14,10 +14,10 @@ public class Apache extends Helicopter {
     public Apache(String jmeno) {
         super(jmeno);
         super.setType("Apache");
-        super.setHealth(30);
+        super.setHealth(60);
         super.setMaxShotSpeed(120);
         super.setFirepower(1);
-        super.setSize(2);
-        super.setSpeed(3);
+        super.setSize(0.06);
+        super.setSpeed(5);
     }
 }
