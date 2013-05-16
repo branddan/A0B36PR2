@@ -132,7 +132,6 @@ public class Helicopter {
                 break;
         }
         this.game.getGameW().move();
-        //this.setSpeed(speed - 1);
     }
 
     @Override

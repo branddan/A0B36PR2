@@ -64,6 +64,7 @@ public class GameWindow extends JFrame {
                 out.write(playerAt.getType() + " " + playerAt.getPlayerName() + " " + (int) playerAt.getHealth() + " " + (int) playerAt.getPosition().getX() + " " + (int) playerAt.getPosition().getY() + " " + playerDef.getType() + " " + playerDef.getPlayerName() + " " + (int) playerDef.getHealth() + " " + (int) playerDef.getPosition().getX() + " " + (int) playerDef.getPosition().getY());
                 out.close();
                 GameWindow g = (GameWindow) this.getParent().getParent().getParent().getParent();
+                System.exit(0);
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(GameWindow.class.getName()).log(Level.SEVERE, null, ex);
             } catch (FileNotFoundException ex) {

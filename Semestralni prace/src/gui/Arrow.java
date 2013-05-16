@@ -40,7 +40,6 @@ public class Arrow extends JButton implements ActionListener {
         switch (direction) {
             case "up": {
                 if (playerAt.getPosition().getY() + 10 - 20 <= 0) {
-                    System.out.println("up" + playerAt);
                     outofScreen(g);
                     out = true;
                 }
@@ -49,7 +48,6 @@ public class Arrow extends JButton implements ActionListener {
             case "down": {
                 if (playerAt.getPosition().getY() + 20 >= 320) {
                     outofScreen(g);
-                    System.out.println("down" + playerAt);
                     out = true;
                 }
             }
@@ -57,7 +55,6 @@ public class Arrow extends JButton implements ActionListener {
             case "left": {
                 if (playerAt.getPosition().getX() + 23 - 30 <= 0) {
                     outofScreen(g);
-                    System.out.println("left" + playerAt);
                     out = true;
                 }
             }
@@ -65,7 +62,6 @@ public class Arrow extends JButton implements ActionListener {
             case "right": {
                 if (playerAt.getPosition().getX() + 50 + 30 >= 800) {
                     outofScreen(g);
-                    System.out.println("right" + playerAt);
                     out = true;
                 }
             }
@@ -73,16 +69,12 @@ public class Arrow extends JButton implements ActionListener {
         }
         if (!out) {
             playerAt.move(direction);
-            System.out.println(playerAt);
             g.move();
             g.setMovesLeft(g.getMovesLeft() - 1);
-            System.out.println("moves " + g.getMovesLeft());
-            System.out.println("moves " + playerAt.getSpeed());
             g.getScreen().repaint();
             g.getInstructions().setForeground(Color.green);
             g.getInstructions().setText("Player " + playerAt.getPlayerName() + ", you have " + g.getMovesLeft() + " moves left, you can move (for 1 move point) of fire (2 moves).");
             if (g.getMovesLeft() <= 0) {
-                System.out.println("konec kola");
                 g.setPlayerAt(playerDef); // vymena hracu na konci kola
                 HelicoIcon helico = g.getHelicoDef();
                 g.setHelicoDef(g.getHelicoAt());
