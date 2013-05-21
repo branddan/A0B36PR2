@@ -197,16 +197,18 @@ public class GameWindow extends JFrame {
         fire.addActionListener(new ShotResolve());
 //        this.add(fire);
 
+
+        
         control = new Control();
         control.setBounds(210, 330, 210, 210);
         control.addMouseListener(dl);
         control.addMouseMotionListener(d);
-        control.setOpaque(true);
         JLabel l = new JLabel();
         l.setIcon(new ImageIcon(System.getProperty("user.dir") + "\\images\\zamerovac.jpg"));
         control.add(l);
         this.add(control);
-
+        
+        
 
 
         instructions = new JLabel();
@@ -278,7 +280,8 @@ public class GameWindow extends JFrame {
     }
 
     public void move() {
-        helicoAt.setLocation((int) playerAt.getPosition().getX(), (int) playerAt.getPosition().getY());
+        helicoAt.setBounds((int) playerAt.getPosition().getX(), (int) playerAt.getPosition().getY(), 60, 40);
+//        helicoAt.setLocation((int) playerAt.getPosition().getX(), (int) playerAt.getPosition().getY());
         screen.setXY0((int) playerAt.getPosition().getX(), (int) playerAt.getPosition().getY());
 //        System.out.println("X: " + (int) playerAt.getPosition().getX());
     }

@@ -40,7 +40,7 @@ public class Arrow extends JButton implements ActionListener {
         switch (direction) {
             case "up": {
                 if (playerAt.getPosition().getY() + 10 - 20 <= 0) {
-                    outofScreen(g);
+                    this.outofScreen(g);
                     out = true;
                 }
             }
@@ -83,13 +83,13 @@ public class Arrow extends JButton implements ActionListener {
                 g.setMovesLeft(playerDef.getSpeed());
                 g.getInstructions().setText("Player " + playerAt.getPlayerName() + ", it's your turn, you can move (for 1 move point) of fire (2 moves).");
             }
-        }
+//        }
 
     }
-
-    private void outofScreen(GameWindow g) {
-        g.getInstructions().setForeground(Color.orange);
-        g.getInstructions().setText("You cannot move further");
+    }
+    private void outofScreen(GameWindow gw) {
+        gw.getInstructions().setForeground(Color.orange);
+        gw.getInstructions().setText("You cannot move further");
     }
 
     public void setImage(String imageName) {

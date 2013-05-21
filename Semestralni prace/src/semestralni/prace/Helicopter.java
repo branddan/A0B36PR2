@@ -131,7 +131,7 @@ public class Helicopter {
             default:
                 break;
         }
-        this.game.getGameW().move();
+//        this.game.getGameW().move();
     }
 
     @Override
